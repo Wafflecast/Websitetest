@@ -90,7 +90,10 @@
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            fetch('http://localhost:3000/login', {
+            // Replace this with your public IP or local IP if testing in your network
+            const serverUrl = 'http://<http://10.0.0.36:3000/>:3000/login'; 
+
+            fetch(serverUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
