@@ -86,38 +86,43 @@
     </div>
 
     <script>
+        // Predefined user credentials
+        const users = [
+            {
+                "username": "Waffle",
+                "email": "waffle@discleaner.com",
+                "password": "password123"
+            },
+            {
+                "username": "Jeff",
+                "email": "jeff@discleaner.com",
+                "password": "jeffpass"
+            },
+            {
+                "username": "Poshy",
+                "email": "poshy@discleaner.com",
+                "password": "poshypassword"
+            }
+        ];
+
         function loginEmployee() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Updated to use your public IP address
-            const serverUrl = 'http://129.222.118.214:3000/login'; 
+            // Check if the entered credentials match any of the users
+            const user = users.find(u => u.email === email && u.password === password);
 
-            fetch(serverUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ email, password })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Store username in localStorage
-                    localStorage.setItem('username', data.username);
-                    
-                    showStatus('Login successful! Redirecting...', 'success');
-                    setTimeout(() => {
-                        window.location.href = '/employee-dashboard.html'; // Redirect to the dashboard after login
-                    }, 1500);
-                } else {
-                    showStatus('Invalid email or password. Please try again.', 'error');
-                }
-            })
-            .catch(error => {
-                showStatus('An error occurred. Please try again later.', 'error');
-                console.error('Login error:', error);
-            });
+            if (user) {
+                // If credentials match, display success and redirect
+                localStorage.setItem('username', user.username);
+                showStatus('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = '/employee-dashboard.html'; // Redirect to the dashboard after login
+                }, 1500);
+            } else {
+                // If credentials don't match, display error
+                showStatus('Invalid email or password. Please try again.', 'error');
+            }
         }
 
         function showStatus(message, type) {
