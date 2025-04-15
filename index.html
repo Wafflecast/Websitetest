@@ -94,8 +94,6 @@
     Billyhay's File Part 2 drops in <span id="countdown">Loading...</span>
   </div>
 
-  <!-- ...everything above stays unchanged -->
-
   <section>
     <h2>What Happened</h2>
     <p>
@@ -117,9 +115,6 @@
       <strong>Note:</strong> This information is provided for transparency and community protection purposes only. Please do not engage in harassment or doxxing. Report through proper channels.
     </p>
   </section>
-
-<!-- The rest of your code continues as it was... -->
-
 
   <section>
     <h2>Call to Action</h2>
@@ -154,7 +149,24 @@
   <section>
     <h2>🎥 More POVs Coming Soon</h2>
     <div class="coming-soon">🔒 POV #2 — Coming April 21 @ 9PM EST</div>
-    <br>
+  </section>
+
+  <section>
+    <h2>🎬 End Game</h2>
+    <div class="countdown" id="endgame-countdown">End Game drops in <span id="endgame-timer">Loading...</span></div>
+    <div class="coming-soon" id="endgame-placeholder">🔒 End Game — Coming April 29 @ 9PM EST</div>
+    <div style="margin-top:1rem; font-style: italic; color: #ccc; text-align: center;">
+      This is the consequence when you defame someone’s name.
+    </div>
+    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;max-width:100%;margin-top:1rem; display: none;" id="endgame-video">
+      <iframe 
+        src="https://www.youtube.com/embed/VIDEO_ID_HERE" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen 
+        style="position:absolute;top:0;left:0;width:100%;height:100%;">
+      </iframe>
+    </div>
   </section>
 
   <section>
@@ -167,12 +179,20 @@
         style="max-width:100%; border-radius:10px; box-shadow: 0 0 20px rgba(255, 79, 79, 0.3);" />
     </div>
   </section>
-<section>
-  <h2>🔒 Evidence Vault</h2>
-  <p>Access the full set of evidence related to Billyhay808's actions. The contents of the vault include screenshots, message logs, and other key materials.</p>
-  <a class="button" href="https://www.mediafire.com/file/j39hfjze2rbn70w/Billyhay-Evidence.zip/file" target="_blank">Download Evidence</a>
-</section>
 
+  <section>
+    <h2>🔒 Evidence Vault</h2>
+    <p>Access the full set of evidence related to Billyhay808's actions. The contents of the vault include screenshots, message logs, and other key materials.</p>
+    <a class="button" href="https://www.mediafire.com/file/j39hfjze2rbn70w/Billyhay-Evidence.zip/file" target="_blank">Download Evidence</a>
+  </section>
+
+  <section>
+    <h2>🧨 The Consequences of Defamation</h2>
+  
+    <blockquote style="font-style: italic; margin: 1.5rem 0; padding-left: 1rem; border-left: 4px solid #ff4f4f; color: #ccc;">
+      "Silence only helped you when no one was willing to speak. That silence is over now."
+    </blockquote>
+  </section>
   
   <section>
     <h2>⚖️ Legal & Community Guidelines</h2>
@@ -184,7 +204,6 @@
       If you believe any content here violates your rights or is factually incorrect, please contact the site admin to resolve the issue.
     </p>
   </section>
-  
 
   <footer>
     Made by Misfitr6. This page exists to spread awareness and protect others. <br>
@@ -192,6 +211,7 @@
   </footer>
 
   <script>
+    // Part 2 Countdown
     const countdownElement = document.getElementById("countdown");
     const releaseDate = new Date("2025-04-21T21:00:00-04:00"); // April 21, 9PM EST
 
@@ -201,19 +221,43 @@
 
       if (diff <= 0) {
         countdownElement.textContent = "Now Released!";
-        return;
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
       }
+    }
 
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-      const minutes = Math.floor((diff / 1000 / 60) % 60);
-      const seconds = Math.floor((diff / 1000) % 60);
+    // End Game Countdown
+    const endgameCountdown = document.getElementById("endgame-timer");
+    const endgamePlaceholder = document.getElementById("endgame-placeholder");
+    const endgameVideo = document.getElementById("endgame-video");
+    const endgameRelease = new Date("2025-04-29T21:00:00-04:00");
 
-      countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    function updateEndgameCountdown() {
+      const now = new Date();
+      const diff = endgameRelease - now;
+
+      if (diff <= 0) {
+        endgameCountdown.textContent = "Now Released!";
+        endgamePlaceholder.style.display = "none";
+        endgameVideo.style.display = "block";
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / 1000 / 60) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+        endgameCountdown.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
     }
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    updateEndgameCountdown();
+    setInterval(updateEndgameCountdown, 1000);
   </script>
 
 </body>
